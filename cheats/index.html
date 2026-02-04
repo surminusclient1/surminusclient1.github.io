@@ -106,14 +106,8 @@
 				const response = await fetch('https://api.github.com/repos/surminusclient1/SurMinus/releases');
 				const releases = await response.json();
 				
-				// Find first release that is not "releases" tag
-				let releaseData = null;
-				for (let release of releases) {
-					if (release.tag_name !== 'releases' && !release.draft) {
-						releaseData = release;
-						break;
-					}
-				}
+				// Get first non-draft release
+				let releaseData = releases.find(r => !r.draft);
 				
 				if (releaseData && releaseData.tag_name) {
 					// Update version
