@@ -38,11 +38,11 @@
 			<div class="inner">
 				<div class="section">
 					<div class="box">
-						<h1><span>Surminus</span><a href="https://github.com/surminusclient/surminus" target="_blank"><i class="material-icons">open_in_new</i></a></h1>
+						<h1><span>Surminus</span><a href="https://github.com/surminusclient1/SurMinus" target="_blank"><i class="material-icons">open_in_new</i></a></h1>
 						The main Surminus project is
-						<a href="https://github.com/surminusclient/surminus">Surminus</a>,
+						<a href="https://github.com/surminusclient1/SurMinus">Surminus</a>,
 						which has been going on strong since May 30th, 2025. Its predecessor was "Surplus".
-						Today the latest version (<span>v4.1</span>) has <span>36.676</span> downloads.
+						Today the latest version (<span id="version-text-cheats">v4.1</span>) has <span id="download-count-cheats">36.676</span> downloads.
 					</div>
 				</div>
 				<div class="section" style="max-width: 450px; flex: 0.8 1 0%;">
@@ -100,7 +100,7 @@
 	<script src="./cheats_files/jquery.min.js.tải xuống"></script>
 	<script src="./cheats_files/template.js.tải xuống"></script>
 	<script>
-		// Fetch latest release from GitHub
+		// Fetch latest release and update version info
 		async function loadLatestRelease() {
 			try {
 				const response = await fetch('https://api.github.com/repos/surminusclient1/SurMinus/releases');
@@ -110,8 +110,11 @@
 				let releaseData = releases.find(r => !r.draft);
 				
 				if (releaseData && releaseData.tag_name) {
-					// Update version
+					// Update version in install box
 					document.getElementById('version-display-cheats').textContent = releaseData.tag_name;
+					
+					// Update version in text
+					document.getElementById('version-text-cheats').textContent = releaseData.tag_name;
 					
 					// Update release URL
 					document.getElementById('release-url-cheats').href = releaseData.html_url;
