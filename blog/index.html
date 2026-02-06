@@ -105,9 +105,14 @@
 					document.getElementById('version-display-blog').textContent = releaseData.tag_name;
 					document.getElementById('release-url-blog').href = releaseData.html_url;
 					
-					// Update description
+					// Update description with bullets
 					const description = releaseData.body || 'No description available';
-					document.getElementById('release-description-blog').innerHTML = description.replace(/\n/g, '<br>').substring(0, 200);
+					const descLines = description
+						.split('\n')
+						.filter(line => line.trim())
+						.map(line => `• ${line.trim()}`)
+						.join('<br>');
+					document.getElementById('release-description-blog').innerHTML = descLines.substring(0, 200);
 					
 					// Check if this is a new version and add blog post
 					const lastVersion = localStorage.getItem('surminus_last_version');
@@ -132,11 +137,18 @@
 			const now = new Date();
 			const dateStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')} ${String(now.getDate()).padStart(2, '0')}/${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}`;
 			
+			// Format description with bullets for each line
+			const descLines = (releaseData.body || 'No description available')
+				.split('\n')
+				.filter(line => line.trim())
+				.map(line => `<p>• ${line.trim()}</p>`)
+				.join('');
+			
 			const blogPost = document.createElement('div');
 			blogPost.className = 'box';
 			blogPost.innerHTML = `
 				<h1><span>New Release: ${releaseData.tag_name}</span></h1>
-				<div><div class="markdown-body">${releaseData.body || 'No description available'}</div></div>
+				<div><div class="markdown-body">${descLines}</div></div>
 				<small class="date">${dateStr}</small>
 			`;
 			
