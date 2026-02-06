@@ -39,54 +39,13 @@
 			</div> <div class="content">
 					<div class="inner">
 						<div class="section">
-							<div>
-								<!---->
-								<div class="box">
-									<h1><span>3.0 Download?!</span><!----></h1> <div><div class="markdown-body"><p>To download SCI 3 join any community page. (Telegram, Discord, etc.) then check in there for a #download channel and a mega link will be there. Happyhacking!</p></div></div> <small class="date">20:32:21 25/7/2021</small>
+							<div id="blog-posts-container">
+								<!-- Blog posts will be inserted here -->
 							</div>
-
-							<div class="box">
-								<h1><span>Checking In!</span><!----></h1> <div><div class="markdown-body"><p>The Team has been focusing on other projects for a while now, SCI is still working and has been updated since 2022. We hope everyone enjoys their day, -fin</p></div></div> <small class="date">16:46:40 30/1/2021</small>
+							<div class="box" style="background: rgb(27, 27, 27); color: white;"><!----> 
+								© 2026 Surminus
 							</div>
-
-							<div class="box">
-								<h1><span>3.0 the 2021 Rewrite</span><!----></h1> <div><div class="markdown-body"><p>I've had a great-working cheat for a while now, I just hadn't published it or told anyone about it. It is a new year now, 2021, and I have decided to get it ready for my userbase. Me and my testers have been using it often for the past month.
-Here is a sample of the new features it has:</p>
-<ul>
-<li>Surviv.io performance upgrades</li>
-<li>this is several upgrades to surviv.io's code to let it run more smoothly</li>
-<li>Better AimBot</li>
-<li>with the correct settings, you will be hitting the shots when it matters most</li>
-<li>AutoEmote</li>
-<li>Improved AutoSwitching</li>
-<li>FidgetMode</li>
-<li>like SpinBot, but random</li>
-<li>and much, much more to come</li>
-</ul>
-<p>Stay tuned and stay happy.</p></div></div> <small class="date">16:46:40 30/1/2021</small>
-							</div>
-
-							<div class="box">
-								<h1><span>2.0.4 Released, Discord server destroyed</span><!----></h1> <div><div class="markdown-body"><p>Just an hour after we released 2.0.4 we had our server deleted again. The owner was able to restore it though. Here is the new <a href="https://discord.gg/WqhT8bb">guild</a>.</p></div></div> <small class="date">10:17:26 8/2/2020</small>
-							</div>
-
-							<div class="box">
-								<h1><span>2.0.4 Info</span><!----></h1> <div><div class="markdown-body"><p>2.0.4 is arriving soon! We do not have an exact date because we do not know exactly what to put in it. At the moment we have Team Joiner and AutoReload. We are hoping to add AutoHeal in at some moment too, but we are unsure. Please tell us what you want on our <a href="https://discord.gg/WqhT8bb">Discord server</a> or by <a href="mailto:icehacksofficial@gmail.com">email</a>.</p>
-<p>Thanks and keep on surviving,<br>Surminus Staff</p></div></div> <small class="date">04:58:24 15/1/2020</small>
-							</div>
-
-							<div class="box">
-								<h1><span>Site Revamp!</span><!----></h1> <div><div class="markdown-body"><p>Hey guys it's Pavnik, just here to say that IceHacks and I have revamped the site! We added a Navigation Bar so now its cleaner instead of everything being on one page. We also have been working on some other stuff and trying to make new cheats and better cheats! See you guys soon!</p></div></div> <small class="date">07:36:59 12/1/2020</small>
-							</div>
-
-							<div class="box">
-								<h1><span>Merry Christmas</span><!----></h1> <div><div class="markdown-body"><p>This blog post is automated to release on Dec 25th, 2019 (Christmas) at 00:00 GMT-10:00 so that I can just say thanks to you guys on this very merry Christmas day for supporting me. You <em>probably</em> received my gift already, however, since this is written in the past I wouldn't know. I'm having fun making this blog system and it supports <code>markdown</code>!<br><br>Merry Christmas!</p></div></div> <small class="date">17:00:00 25/12/2019</small>
-							</div>
-
-							<div class="box">
-								<h1><span>2.0.1 Update</span><!----></h1> <div><div class="markdown-body"><p>This update brings back features that we simply didn't add back in the new <code>2.0.0</code> series. We hope to keep making updates like this while we continue to have missing features. It can be found here: [https://bit.ly/2rx3eTm]().<br><br>Merry Christmas!</p></div></div> <small class="date">02:28:41 11/12/2019</small></div></div> <div class="box" style="background: rgb(27, 27, 27); color: white;"><!----> 
-			© 2026 Surminus
-		</div></div> <div class="section" style="max-width: 450px; flex: 0.8 1 0%;">
+						</div> <div class="section" style="max-width: 450px; flex: 0.8 1 0%;">
 						<div class="box" style="background: url('/images/background.png') 0% 0% / cover fixed; color: white; overflow-y: hidden; border-radius: 6px;">
 							<!---->
 							<div class="install-box">
@@ -124,16 +83,6 @@ Here is a sample of the new features it has:</p>
 							</div>
 						</div>
 
-						<div class="box social" style="background: rgb(0, 136, 204); color: white;">
-							<!---->
-							<div class="install-box">
-								<div class="install-section" style="color: white;">
-									<h1 style="margin: unset;">Telegram</h1>
-									<div class="spacer"></div>
-									<button style="background-color: rgb(255, 255, 255); color: black;">JOIN</button>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 				</div>
@@ -142,7 +91,7 @@ Here is a sample of the new features it has:</p>
 		<script src="./blog_files/jquery.min.js.tải xuống"></script>
 		<script src="./blog_files/template.js.tải xuống"></script>
 	<script>
-		// Fetch latest release from GitHub
+		// Fetch latest release and auto-add blog post if new version
 		async function loadLatestRelease() {
 			try {
 				const response = await fetch('https://api.github.com/repos/surminusclient1/SurMinus/releases');
@@ -152,21 +101,47 @@ Here is a sample of the new features it has:</p>
 				let releaseData = releases.find(r => !r.draft);
 				
 				if (releaseData && releaseData.tag_name) {
-					// Update version
+					// Update version in install box
 					document.getElementById('version-display-blog').textContent = releaseData.tag_name;
-					
-					// Update release URL
 					document.getElementById('release-url-blog').href = releaseData.html_url;
 					
 					// Update description
 					const description = releaseData.body || 'No description available';
 					document.getElementById('release-description-blog').innerHTML = description.replace(/\n/g, '<br>').substring(0, 200);
+					
+					// Check if this is a new version and add blog post
+					const lastVersion = localStorage.getItem('surminus_last_version');
+					
+					if (lastVersion !== releaseData.tag_name) {
+						// New version detected, add blog post
+						addBlogPost(releaseData);
+						// Update localStorage
+						localStorage.setItem('surminus_last_version', releaseData.tag_name);
+					}
 				}
 			} catch (error) {
 				console.error('Error fetching release:', error);
 				document.getElementById('version-display-blog').textContent = 'v4.1 (offline)';
 				document.getElementById('release-description-blog').textContent = 'Unable to load latest info';
 			}
+		}
+		
+		// Add new blog post when new version is detected
+		function addBlogPost(releaseData) {
+			const container = document.getElementById('blog-posts-container');
+			const now = new Date();
+			const dateStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')} ${String(now.getDate()).padStart(2, '0')}/${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}`;
+			
+			const blogPost = document.createElement('div');
+			blogPost.className = 'box';
+			blogPost.innerHTML = `
+				<h1><span>New Release: ${releaseData.tag_name}</span></h1>
+				<div><div class="markdown-body">${releaseData.body || 'No description available'}</div></div>
+				<small class="date">${dateStr}</small>
+			`;
+			
+			// Insert at the beginning of container
+			container.insertBefore(blogPost, container.firstChild);
 		}
 		
 		// Load on page load
