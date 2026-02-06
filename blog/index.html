@@ -91,6 +91,30 @@
 		<script src="./blog_files/jquery.min.js.tải xuống"></script>
 		<script src="./blog_files/template.js.tải xuống"></script>
 	<script>
+		// Load blog posts from localStorage and render them
+		function loadBlogPostsFromStorage() {
+			const container = document.getElementById('blog-posts-container');
+			const blogPostsJson = localStorage.getItem('surminus_blog_posts');
+			
+			if (blogPostsJson) {
+				try {
+					const blogPosts = JSON.parse(blogPostsJson);
+					blogPosts.forEach(post => {
+						const blogPost = document.createElement('div');
+						blogPost.className = 'box';
+						blogPost.innerHTML = `
+							<h1><span>New Release: ${post.version}</span></h1>
+							<div><div class="markdown-body">${post.description}</div></div>
+							<small class="date">${post.date}</small>
+						`;
+						container.appendChild(blogPost);
+					});
+				} catch (e) {
+					console.error('Error parsing blog posts:', e);
+				}
+			}
+		}
+		
 		// Fetch latest release and auto-add blog post if new version
 		async function loadLatestRelease() {
 			try {
@@ -133,7 +157,6 @@
 		
 		// Add new blog post when new version is detected
 		function addBlogPost(releaseData) {
-			const container = document.getElementById('blog-posts-container');
 			const now = new Date();
 			const dateStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')} ${String(now.getDate()).padStart(2, '0')}/${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}`;
 			
@@ -144,20 +167,45 @@
 				.map(line => `<p>• ${line.trim()}</p>`)
 				.join('');
 			
-			const blogPost = document.createElement('div');
-			blogPost.className = 'box';
-			blogPost.innerHTML = `
-				<h1><span>New Release: ${releaseData.tag_name}</span></h1>
-				<div><div class="markdown-body">${descLines}</div></div>
-				<small class="date">${dateStr}</small>
-			`;
+			// Create blog post object
+			const blogPost = {
+				version: releaseData.tag_name,
+				description: descLines,
+				date: dateStr
+			};
 			
-			// Insert at the beginning of container
-			container.insertBefore(blogPost, container.firstChild);
+			// Save to localStorage
+			const blogPostsJson = localStorage.getItem('surminus_blog_posts');
+			let blogPosts = [];
+			if (blogPostsJson) {
+				try {
+					blogPosts = JSON.parse(blogPostsJson);
+				} catch (e) {
+					console.error('Error parsing blog posts:', e);
+				}
+			}
+			
+			// Add new post at the beginning
+			blogPosts.unshift(blogPost);
+			localStorage.setItem('surminus_blog_posts', JSON.stringify(blogPosts));
+			
+			// Add to DOM
+			const container = document.getElementById('blog-posts-container');
+			const blogPostDiv = document.createElement('div');
+			blogPostDiv.className = 'box';
+			blogPostDiv.innerHTML = `
+				<h1><span>New Release: ${blogPost.version}</span></h1>
+				<div><div class="markdown-body">${blogPost.description}</div></div>
+				<small class="date">${blogPost.date}</small>
+			`;
+			container.insertBefore(blogPostDiv, container.firstChild);
 		}
 		
-		// Load on page load
-		window.addEventListener('load', loadLatestRelease);
+		// Load blog posts first, then fetch latest release
+		window.addEventListener('load', () => {
+			loadBlogPostsFromStorage();
+			loadLatestRelease();
+		});
 	</script>
 
 </body></html>
