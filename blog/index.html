@@ -78,13 +78,7 @@
 								<div class="install-section" style="color: white;">
 									<h1 style="margin: unset;">Discord</h1>
 									<div class="spacer"></div>
-									<button style="background-color: rgb(115, 139, 215); color: white;">JOIN</button>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
+								<button onclick="javascript:window.open('https://discord.gg/STcYcBZa', '_blank')" style="background-color: rgb(115, 139, 215); color: white;">JOIN</button>
 				</div>
 		<script src="./blog_files/vue.min.js.tải xuống"></script>
 		<script src="./blog_files/showdown.js.tải xuống"></script>
@@ -138,14 +132,23 @@
 						.join('<br>');
 					document.getElementById('release-description-blog').innerHTML = descLines.substring(0, 200);
 					
-					// Check if this is a new version and add blog post
-					const lastVersion = localStorage.getItem('surminus_last_version');
+					// Check if this version exists in localStorage
+					const blogPostsJson = localStorage.getItem('surminus_blog_posts');
+					let blogPosts = [];
+					let versionExists = false;
 					
-					if (lastVersion !== releaseData.tag_name) {
-						// New version detected, add blog post
+					if (blogPostsJson) {
+						try {
+							blogPosts = JSON.parse(blogPostsJson);
+							versionExists = blogPosts.some(post => post.version === releaseData.tag_name);
+						} catch (e) {
+							console.error('Error parsing blog posts:', e);
+						}
+					}
+					
+					// If version not in storage, add it
+					if (!versionExists) {
 						addBlogPost(releaseData);
-						// Update localStorage
-						localStorage.setItem('surminus_last_version', releaseData.tag_name);
 					}
 				}
 			} catch (error) {
@@ -164,8 +167,8 @@
 			const descLines = (releaseData.body || 'No description available')
 				.split('\n')
 				.filter(line => line.trim())
-				.map(line => `<p>• ${line.trim()}</p>`)
-				.join('');
+				.map(line => `• ${line.trim()}`)
+				.join('<br>');
 			
 			// Create blog post object
 			const blogPost = {
@@ -181,7 +184,7 @@
 				try {
 					blogPosts = JSON.parse(blogPostsJson);
 				} catch (e) {
-					console.error('Error parsing blog posts:', e);
+					console.error('Error parsing existing blog posts:', e);
 				}
 			}
 			
