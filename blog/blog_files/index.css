@@ -321,7 +321,7 @@ hr {
 }
 
 
-/* Material 3-inspired visual refresh (merge-resolved in single token block) */
+/* Material 3-inspired visual refresh */
 
 body {
 	background: linear-gradient(180deg, #f8f2ff 0%, #f6f3fb 45%, #fdf8ff 100%);
